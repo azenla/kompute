@@ -1,12 +1,13 @@
 plugins {
-  kotlin("jvm") version "1.3.72" apply false
-  kotlin("plugin.serialization") version "1.3.72" apply false
+  kotlin("jvm") version "1.4.0" apply false
+  kotlin("plugin.serialization") version "1.4.0" apply false
 
-  id("com.diffplug.gradle.spotless") version "3.27.2"
+  id("com.diffplug.spotless") version "5.3.0"
+  id("com.palantir.docker") version "0.25.0" apply false
 }
 
 repositories {
-  jcenter()
+  mavenCentral()
 }
 
 spotless {
@@ -39,6 +40,6 @@ spotless {
 }
 
 tasks.withType<Wrapper> {
-  gradleVersion = "6.5"
+  gradleVersion = "6.6.1"
   distributionType = Wrapper.DistributionType.ALL
 }

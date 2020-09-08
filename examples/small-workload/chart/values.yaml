@@ -1,0 +1,10 @@
+base:
+  imagePrefix: docker.pkg.github.com/kendfinger/kompute
+  imagePullPolicy: IfNotPresent
+workload:
+  replicas: 6
+  development: enabled
+service:
+  type: LoadBalancer
+ingress:
+  enabled: true

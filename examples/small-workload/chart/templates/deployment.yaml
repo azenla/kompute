@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-small-workload
+  labels:
+    app: {{ .Release.Name }}-small-workload
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-small-workload
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-small-workload
+    spec:
+      containers:
+        - name: small-workload
+          image: {{ .Values.base.imagePrefix }}/examples/small-workload
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DEV_MODE
+              value: {{ .Values.workload.development }}
+            - name: KOMPUTE_SERVICE_HOST
+              value: "{{ .Release.Name }}-small-workload.{{ .Release.Namespace }}.svc.cluster.local"
+            - name: KOMPUTE_SERVICE_PORT
+              value: "80"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+  replicas: {{ .Values.workload.replicas }}
