@@ -1,5 +1,5 @@
 base:
-  imagePrefix: docker.pkg.github.com/kendfinger/kompute
+  imagePrefix: ghcr.io/kendfinger/kompute
   imagePullPolicy: IfNotPresent
 workload:
   replicas: 6

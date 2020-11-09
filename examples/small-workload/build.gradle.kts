@@ -24,6 +24,6 @@ kotlin.sourceSets["main"].apply {
 }
 
 docker {
-  name = "docker.pkg.github.com/kendfinger/kompute/examples/small-workload"
+  name = "ghcr.io/kendfinger/kompute/examples/small-workload"
   files(tasks.distTar)
 }
